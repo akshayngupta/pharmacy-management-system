@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="dashboard-grid">
+    <div class="stat-card">
+        <h3>Total Medicines</h3>
+        <div class="value">{{ stats.total_medicines }}</div>
+    </div>
+    <div class="stat-card">
+        <h3>Total Customers</h3>
+        <div class="value">{{ stats.total_customers }}</div>
+    </div>
+    <div class="stat-card">
+        <h3>Total Sales Today</h3>
+        <div class="value">${{ stats.total_sales or '0.00' }}</div>
+    </div>
+    <div class="stat-card" style="border-left-color: var(--danger);">
+        <h3>Low Stock Items</h3>
+        <div class="value">{{ stats.low_stock }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <h2>Recent Sales</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Sale ID</th>
+                <th>Customer</th>
+                <th>Date</th>
+                <th>Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>#{{ sale.id }}</td>
+                <td>{{ sale.name }}</td>
+                <td>{{ sale.sale_date }}</td>
+                <td>${{ sale.total_amount }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4">No recent sales.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

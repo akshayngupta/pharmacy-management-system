@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Reports</h1>
+<div class="card">
+    <h2>Low Stock Items</h2>
+    <table>
+        <thead><tr><th>ID</th><th>Medicine</th><th>Total Quantity</th><th>Reorder Level</th></tr></thead>
+        <tbody>
+            {% for item in low_stock %}
+            <tr style="background-color: #ffeeba;">
+                <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.total_qty }}</td><td>{{ item.reorder_level }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4">No low stock items.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="card">
+    <h2>Available Batches</h2>
+    <table>
+        <thead><tr><th>Batch ID</th><th>Medicine ID</th><th>Batch Number</th><th>Expiry</th><th>Qty</th></tr></thead>
+        <tbody>
+            {% for item in available_stock %}
+            <tr>
+                <td>{{ item.id }}</td><td>{{ item.medicine_id }}</td><td>{{ item.batch_number }}</td><td>{{ item.expiry_date }}</td><td>{{ item.quantity }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5">No available stock.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

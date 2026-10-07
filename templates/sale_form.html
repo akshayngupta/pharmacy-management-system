@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>New Sale</h1>
+<div class="card">
+    <form method="POST">
+        <div>
+            <label>Customer</label>
+            <select name="customer_id" required>
+                {% for c in customers %}
+                <option value="{{ c.id }}">{{ c.name }} ({{ c.phone }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Medicine Batch (Available Only)</label>
+            <select name="batch_id" required>
+                {% for b in batches %}
+                <option value="{{ b.batch_id }}">{{ b.name }} - {{ b.batch_number }} (Qty: {{ b.quantity }})</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Quantity</label>
+            <input type="number" name="quantity" min="1" required>
+        </div>
+        <div>
+            <label>Payment Mode</label>
+            <select name="payment_mode" required>
+                <option value="Cash">Cash</option>
+                <option value="Card">Card</option>
+                <option value="UPI">UPI</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Complete Sale</button>
+    </form>
+</div>
+{% endblock %}
